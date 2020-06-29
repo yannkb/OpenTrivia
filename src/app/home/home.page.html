@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+<ion-toolbar>
+	<ion-title>
+	Open Trivia
+	</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<ion-header collapse="condense">
+	<ion-toolbar>
+	<ion-title size="large">Open Trivia</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<div id="container" *ngIf="!isOk">
+	<div>
+		<label for="pseudo">Votre pseudo</label>
+		<input type="text" name="pseudo" [(ngModel)]="pseudo">
+	</div>
+	<div>
+		<label for="difficulty">Difficulté</label>
+		<select name="difficulty" [(ngModel)]="difficulty">
+			<option value="easy">Easy</option>
+			<option value="medium">Medium</option>
+			<option value="hard">Hard</option>
+		</select>
+	</div>
+	<div>
+		<input type="checkbox" name="save">
+		<label for="save">Sauvegarder mes informations</label>
+	</div>
+	<div>
+		<input type="button" value="Commencer" (click)="checkForm()">
+	</div>
+	<div *ngIf="error">
+		{{ error }}
+	</div>
+</div>
+<div id="container" *ngIf="isOk">
+	<p>Bienvenue {{ pseudo }} !</p>
+	<h1>Quel est le premier Président afro-américain des États-Unis ?</h1>
+	<div>
+		<input type="button" value="Réponse A" (click)="checkAnswer()">
+		<input type="button" value="Réponse B" (click)="checkAnswer()">
+		<input type="button" value="Réponse C" (click)="checkAnswer()">
+		<input type="button" value="Réponse D" (click)="checkAnswer()">
+	</div>
+	<div>
+		<input type="button" value="Question suivante" *ngIf="hasAnswered">
+	</div>
+</div>
+</ion-content>
