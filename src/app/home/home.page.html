@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
 <ion-toolbar>
-	<ion-title>
-	Open Trivia
-	</ion-title>
+	<ion-title>Open Trivia</ion-title>
 </ion-toolbar>
 </ion-header>
 
@@ -13,41 +11,30 @@
 	</ion-toolbar>
 </ion-header>
 
-<div id="container" *ngIf="!isOk">
-	<div>
-		<label for="pseudo">Votre pseudo</label>
-		<input type="text" name="pseudo" [(ngModel)]="pseudo">
-	</div>
-	<div>
-		<label for="difficulty">Difficulté</label>
-		<select name="difficulty" [(ngModel)]="difficulty">
-			<option value="easy">Easy</option>
-			<option value="medium">Medium</option>
-			<option value="hard">Hard</option>
-		</select>
-	</div>
-	<div>
-		<input type="checkbox" name="save">
-		<label for="save">Sauvegarder mes informations</label>
-	</div>
-	<div>
-		<input type="button" value="Commencer" (click)="checkForm()">
-	</div>
-	<div *ngIf="error">
-		{{ error }}
-	</div>
-</div>
-<div id="container" *ngIf="isOk">
-	<p>Bienvenue {{ pseudo }} !</p>
-	<h1>Quel est le premier Président afro-américain des États-Unis ?</h1>
-	<div>
-		<input type="button" value="Réponse A" (click)="checkAnswer()">
-		<input type="button" value="Réponse B" (click)="checkAnswer()">
-		<input type="button" value="Réponse C" (click)="checkAnswer()">
-		<input type="button" value="Réponse D" (click)="checkAnswer()">
-	</div>
-	<div>
-		<input type="button" value="Question suivante" *ngIf="hasAnswered">
-	</div>
-</div>
+
+<ion-list *ngIf="!gameCanStart">
+	<ion-item>
+		<ion-label position="floating">Votre pseudo</ion-label>
+		<ion-input type="text" [(ngModel)]="pseudo"></ion-input>
+    </ion-item>
+    <ion-item>
+		<ion-label position="floating">Catégorie</ion-label>
+		<ion-select [(ngModel)]="chosenCategory">
+			<ion-select-option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Difficulté</ion-label>
+		<ion-select [(ngModel)]="difficulty">
+			<ion-select-option value="easy">Easy</ion-select-option>
+			<ion-select-option value="medium">Medium</ion-select-option>
+			<ion-select-option value="hard">Hard</ion-select-option>
+		</ion-select>
+	</ion-item>
+	<ion-item>
+		<ion-toggle type="checkbox" [(ngModel)]="save"></ion-toggle>
+		<ion-label>Sauvegarder mes informations</ion-label>
+	</ion-item>
+	<ion-button expand="full" (click)="checkForm()">Commencer</ion-button>
+</ion-list>
 </ion-content>

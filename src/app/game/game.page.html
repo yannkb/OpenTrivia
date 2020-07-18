@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Open Trivia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-text color="primary">
+      <p class="ion-text-center">Bienvenue {{pseudo}} !</p>
+    </ion-text>
+    <h4 class="ion-text-center" [innerHTML]="currentQuestion.question"></h4>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let answer of currentQuestion.answers">
+          <ion-button color="transparent" expand="full" (click)="checkAnswer(answer)"
+          style="color: black;"
+          [ngClass]="{'right': hasAnswered && answer.correct, 'wrong': hasAnswered && !answer.correct}"
+          [innerHTML]="answer.answer"
+          [disabled]="hasAnswered">
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="full" color="primary" *ngIf="hasAnswered && !gameOver" (click)="getNextQuestion()">Question suivante</ion-button>
+    <ion-button expand="full" color="primary" *ngIf="hasAnswered && gameOver" (click)="displayScore()">Voir mon score</ion-button>
+  </div>
+</ion-content>

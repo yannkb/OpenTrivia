@@ -1,5 +1,8 @@
 {
   "name": "Module04TP01",
-  "integrations": {},
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
   "type": "angular"
 }
